@@ -67,6 +67,11 @@
             line-height: 150%;
         }
 
+        .txt_small {
+            font-size: 1.1rem;
+            line-height: 150%;
+        }
+
         .blank {
             margin-bottom: 3%;
         }
@@ -74,227 +79,465 @@
 </head>
 
 <body>
-    <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper">
-                <a style="margin-left:25px" class="brand-logo" href="#home">SSG-LUGIA</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <a class="waves-effect waves-light">Publication</a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-light" href="#codes">Codes</a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-light" href="#app">Desktop App
-                            <span class="new badge pink lighten-2 black-text" data-badge-caption="Coming Soon"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-light" href="#contact">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-
-    <div class="title-container z-depth-5" id="home">
-        <h2 class="center">SSG-LUGIA: Single Sequence based Genome Level Unsupervised Genomic Island Prediction Algorithm</h2>
-
-    </div>
-
-    <div class="blank"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">Background</h3>
-        <span class="txt">
-            Genomic Islands (GIs) are clusters of genes that are mobilized through horizontal gene transfer. GIs play a pivotal role
-            in bacterial evolution as a mechanism of diversification and adaptation to different niches. Therefore, identification
-            and characterization of GIs in bacterial genomes is important for understanding bacterial evolution. However,
-            quantifying GIs is inherently difficult, and the existing methods suffer from low prediction accuracy and precision-recall
-            trade-off. Moreover, several of them are supervised in nature and thus their applications to newly sequenced
-            genomes are riddled with their dependency on the functional annotation of existing genomes.
-        </span>
-    </div>
-
-    <div class="blank"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">SSG-LUGIA</h3>
-        <span class="txt">
-            We present SSG-LUGIA, a completely automated and unsupervised approach for identifying GIs and horizontally transferred genes.
-            SSG-LUGIA is a novel method based on unsupervised anomaly detection technique, accompanied by further refinement
-            using cues from signal processing literature. SSG-LUGIA leverages the atypical compositional biases of the alien
-            genes to localize GIs in prokaryotic genomes. SSG-LUGIA was assessed on the
-            <strong>IslandPick</strong> benchmark dataset, and on the well-understood
-            <em>Salmonella typhi</em>
-            <strong>CT18</strong> genome. Furthermore, the efficacy of SSG-LUGIA in identifying horizontally transferred genes was
-            evaluated on two additional bacterial genomes, namely, that of
-            <em>Corynebacterium diphtheria</em>
-            <strong>NCTC13129</strong> and
-            <em>Pseudomonas aeruginosa</em>
-            <strong>LESB58</strong>.
-        </span>
-    </div>
-
-    <div class="blank"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">Method</h3>
-        <img src="imgs/SSG-LUGIA.png" width="100%" alt="" srcset="" style="margin-bottom: 5%">
-        <span class="txt">
-            SSG-LUGIA takes an unannotated genome sequence as input and predicts GIs and optionally enlists putative horizontally transferred
-            genes in case a gene annotation file is provided. The genome sequence of interest is first split into overlapping
-            window frames that are then analyzed for the presence of GI distinguishing features compiled from publicly available
-            literature on GIs. The genome sequence is screened for “anomalous” regions based on GI distinguishing features
-            using an unsupervised machine learning procedure. The anomalous segments thus identified are further refined
-            following a post-processing step, and finally, the proximal segments are merged to produce the list of GIs (and
-            optionally, the list of horizontally transferred genes).
-        </span>
-    </div>
-
-    <div class="blank"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">Conclusions</h3>
-
-        <span class="txt">
-            Our results indicate that SSG-LUGIA achieved superior performance in comparison to frequently used existing methods. Importantly,
-            it yielded a better trade-off between precision and recall than the existing methods. Its non-dependency on the
-            functional annotation of genomes makes it suitable for analyzing newly sequenced, yet uncharacterized genomes.
-        </span>
-
-        <div class="blank"></div>
-
-        <span class="txt">
-            Thus, our study is a significant advance in identification of GIs and horizontally transferred genes.
-        </span>
-
-        <div class="blank"></div>
-
-        <span class="txt">
-            The source code for SSG-LUGIA has been made open-source to aid the biologists in inferring genomic islands and horizontaly
-            transferred genes from newly sequenced genomes. To further facilitate there discovery SSG-LUGIA will be made
-            available as a web interface with a server application, along with portable cross-platform native applications
-            in coming days.
-        </span>
-    </div>
-
-    <div class="blank" id="codes"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">Source Code</h3>
-
-        <span class="txt">
-            The source code for SSG-LUGIA can be found in the following github repository.
-        </span>
-
-        <div class="blank"></div>
-
-        <div style="text-align:center">
-            <a class=" waves-effect waves-blue btn-flat btn-large grey lighten-1" href="https://github.com/nibtehaz/SSG-LUGIA" target="_blank">nibtehaz/SSG-LUGIA</a>
-
+    <div class="hide-on-small-only">
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a style="margin-left:25px" class="brand-logo" href="#home">SSG-LUGIA</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <a class="waves-effect waves-light">Publication</a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#codes">Codes</a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#app">Desktop App
+                                <span class="new badge pink lighten-2 black-text" data-badge-caption="Coming Soon"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </div>
 
-
-    <div class="blank"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">Usage</h3>
-
-        <span class="txt">
-            SSG-LUGIA provides a flexible way to use the pipeline as a command line interface
-        </span>
-
-        <div class="blank"></div>
-
-        <div class="txt">
-
-            1. Clone the git repository.
-            <br>
-            <br>
-            <!-- HTML generated using hilite.me -->
-            <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-                <pre style="margin: 0; line-height: 125%">$ git clone https://github.com/nibtehaz/SSG-LUGIA.git</pre>
-            </div>
-            <br>
-            <br> 2. Navigate to the
-            <span style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .1em;padding:.2em .6em;">/codes</span> directory
-            <br>
-            <br> 3. Import the SSG-LUGIA pipeline from the
-            <span style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .1em;padding:.2em .6em;">main.py</span> script.
-            <br>
-            <br> 4. Execute the SSG-LUGIA pipeline, using either a standard model (SSG-LUGIA-F, SSG-LUGIA-R, SSG-LUGIA-P) or a custom model configuration
-            <br>
-            <br>
-            <div class="row">
-                <div class="col s12 m6 z-depth-2" style="border: solid 0px gray; border-radius: 0.5rem;margin-left:-1%;margin-right:1%;">
-                    (i) Input the path to the genome sequence and provide a standard model name
-
-                    <img src="imgs/ssg_lugia1.gif" width="100%" alt="" srcset="">
-                    <br>
-                    <br>
-                </div>
-
-                <div class="col s12 m6 z-depth-2" style="border: solid 0px gray; border-radius: 0.5rem">
-                    (ii) Input the path to the genome sequence and input the model parameters interactively
-
-                    <img src="imgs/ssg_lugia2.gif" width="100%" alt="" srcset="">
-                    <br>
-                    <br>
-                </div>
-            </div>
-
+        <div class="title-container z-depth-5" id="home">
+            <h2 class="center">SSG-LUGIA: Single Sequence based Genome Level Unsupervised Genomic Island Prediction Algorithm</h2>
 
         </div>
 
-    </div>
+        <div class="blank"></div>
 
-    <div class="blank" id="app"></div>
-
-    <div class="container white z-depth-3">
-        <h3 class="header">Desktop App</h3>
-
-        <span class="txt">
-            A cross-platform desktop app of SSG-LUGIA is under development and will be released soon.
-        </span>
+        <div class="container white z-depth-3">
+            <h3 class="header">Background</h3>
+            <span class="txt">
+                Genomic Islands (GIs) are clusters of genes that are mobilized through horizontal gene transfer. GIs play a pivotal role
+                in bacterial evolution as a mechanism of diversification and adaptation to different niches. Therefore, identification
+                and characterization of GIs in bacterial genomes is important for understanding bacterial evolution. However,
+                quantifying GIs is inherently difficult, and the existing methods suffer from low prediction accuracy and
+                precision-recall trade-off. Moreover, several of them are supervised in nature and thus their applications
+                to newly sequenced genomes are riddled with their dependency on the functional annotation of existing genomes.
+            </span>
+        </div>
 
         <div class="blank"></div>
 
-        <div style="text-align:center">
-            <div class="preloader-wrapper big active">
-                <div class="spinner-layer spinner-blue-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
+        <div class="container white z-depth-3">
+            <h3 class="header">SSG-LUGIA</h3>
+            <span class="txt">
+                We present SSG-LUGIA, a completely automated and unsupervised approach for identifying GIs and horizontally transferred genes.
+                SSG-LUGIA is a novel method based on unsupervised anomaly detection technique, accompanied by further refinement
+                using cues from signal processing literature. SSG-LUGIA leverages the atypical compositional biases of the
+                alien genes to localize GIs in prokaryotic genomes. SSG-LUGIA was assessed on the
+                <strong>IslandPick</strong> benchmark dataset, and on the well-understood
+                <em>Salmonella typhi</em>
+                <strong>CT18</strong> genome. Furthermore, the efficacy of SSG-LUGIA in identifying horizontally transferred genes
+                was evaluated on two additional bacterial genomes, namely, that of
+                <em>Corynebacterium diphtheria</em>
+                <strong>NCTC13129</strong> and
+                <em>Pseudomonas aeruginosa</em>
+                <strong>LESB58</strong>.
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Method</h3>
+            <img src="imgs/SSG-LUGIA.png" width="100%" alt="" srcset="" style="margin-bottom: 5%">
+            <span class="txt">
+                SSG-LUGIA takes an unannotated genome sequence as input and predicts GIs and optionally enlists putative horizontally transferred
+                genes in case a gene annotation file is provided. The genome sequence of interest is first split into overlapping
+                window frames that are then analyzed for the presence of GI distinguishing features compiled from publicly
+                available literature on GIs. The genome sequence is screened for “anomalous” regions based on GI distinguishing
+                features using an unsupervised machine learning procedure. The anomalous segments thus identified are further
+                refined following a post-processing step, and finally, the proximal segments are merged to produce the list
+                of GIs (and optionally, the list of horizontally transferred genes).
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Conclusions</h3>
+
+            <span class="txt">
+                Our results indicate that SSG-LUGIA achieved superior performance in comparison to frequently used existing methods. Importantly,
+                it yielded a better trade-off between precision and recall than the existing methods. Its non-dependency
+                on the functional annotation of genomes makes it suitable for analyzing newly sequenced, yet uncharacterized
+                genomes.
+            </span>
+
+            <div class="blank"></div>
+
+            <span class="txt">
+                Thus, our study is a significant advance in identification of GIs and horizontally transferred genes.
+            </span>
+
+            <div class="blank"></div>
+
+            <span class="txt">
+                The source code for SSG-LUGIA has been made open-source to aid the biologists in inferring genomic islands and horizontaly
+                transferred genes from newly sequenced genomes. To further facilitate their discovery SSG-LUGIA will be made
+                available as a web interface with a server application, along with portable cross-platform native applications
+                in coming days.
+            </span>
+        </div>
+
+        <div class="blank" id="codes"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Source Code</h3>
+
+            <span class="txt">
+                The source code for SSG-LUGIA can be found in the following github repository.
+            </span>
+
+            <div class="blank"></div>
+
+            <div style="text-align:center">
+                <a class=" waves-effect waves-blue btn-flat btn-large grey lighten-1" href="https://github.com/nibtehaz/SSG-LUGIA" target="_blank">nibtehaz/SSG-LUGIA</a>
+
+            </div>
+        </div>
+
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Usage</h3>
+
+            <span class="txt">
+                SSG-LUGIA provides a flexible way to use the pipeline as a command line interface
+            </span>
+
+            <div class="blank"></div>
+
+            <div class="txt">
+
+                1. Clone the git repository.
+                <br>
+                <br>
+                <!-- HTML generated using hilite.me -->
+                <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                    <pre style="margin: 0; line-height: 125%">$ git clone https://github.com/nibtehaz/SSG-LUGIA.git</pre>
+                </div>
+                <br>
+                <br> 2. Navigate to the
+                <span style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .1em;padding:.2em .6em;">/codes</span> directory
+                <br>
+                <br> 3. Import the SSG-LUGIA pipeline from the
+                <span style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .1em;padding:.2em .6em;">main.py</span> script.
+                <br>
+                <br> 4. Execute the SSG-LUGIA pipeline, using either a standard model (SSG-LUGIA-F, SSG-LUGIA-R, SSG-LUGIA-P)
+                or a custom model configuration
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col s12 m6 z-depth-2" style="border: solid 0px gray; border-radius: 0.5rem;margin-left:-1%;margin-right:1%;">
+                        (i) Input the path to the genome sequence and provide a standard model name
+
+                        <img src="imgs/ssg_lugia1.gif" width="100%" alt="" srcset="">
+                        <br>
+                        <br>
                     </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
+
+                    <div class="col s12 m6 z-depth-2" style="border: solid 0px gray; border-radius: 0.5rem">
+                        (ii) Input the path to the genome sequence and input the model parameters interactively
+
+                        <img src="imgs/ssg_lugia2.gif" width="100%" alt="" srcset="">
+                        <br>
+                        <br>
                     </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="blank" id="app"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Desktop App</h3>
+
+            <span class="txt">
+                A cross-platform desktop app of SSG-LUGIA is under development and will be released soon.
+            </span>
+
+            <div class="blank"></div>
+
+            <div style="text-align:center">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="blank" id="contact"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Contact Us</h3>
+
+            <span class="txt">
+                If you have any queries regarding SSG-LUGIA project, please feel free to contact us.
+
+                <h5 style="text-align:center;padding-top:30px">
+                    <a href="mailto:shams_bayzid@cse.buet.ac.bd?Subject=SSG-LUGIA" target="_top">Md. Shamsuzzoha Bayzid, Assistant Professor, CSE, BUET (shams_bayzid@cse.buet.ac.bd)</a>
+                </h5>
+                <h5 style="text-align:center;padding-top:30px">
+                    <a href="mailto:1017052037@grad.cse.buet.ac.bd?Subject=SSG-LUGIA" target="_top">Nabil Ibtehaz, CSE, BUET (1017052037@grad.cse.buet.ac.bd)</a>
+                </h5>
+
+            </span>
+
+        </div>
+
+        <div class="blank"></div>
     </div>
 
-    <div class="blank" id="contact"></div>
+    <div class="hide-on-med-and-up">
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a class="brand-logo" href="#home">SSG-LUGIA</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <a class="waves-effect waves-light">Publication</a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#codes">Codes</a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#app">Desktop App
+                                <span class="new badge pink lighten-2 black-text" data-badge-caption="Coming Soon"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
-    <div class="container white z-depth-3">
-        <h3 class="header">Contact Us</h3>
+        <div class="title-container z-depth-5" id="home">
+            <h5 class="center">SSG-LUGIA: Single Sequence based Genome Level Unsupervised Genomic Island Prediction Algorithm</h5>
 
-        <span class="txt">
-            If you have any queries regarding SSG-LUGIA project, please feel free to contact us.
+        </div>
 
-            <h5 style="text-align:center;padding-top:30px"><a href="mailto:shams_bayzid@cse.buet.ac.bd?Subject=SSG-LUGIA" target="_top">Md. Shamsuzzoha Bayzid, Assistant Professor, CSE, BUET (shams_bayzid@cse.buet.ac.bd)</a></h5>
-            <h5 style="text-align:center;padding-top:30px"><a href="mailto:1017052037@grad.cse.buet.ac.bd?Subject=SSG-LUGIA" target="_top">Nabil Ibtehaz, CSE, BUET (1017052037@grad.cse.buet.ac.bd)</a></h5>
-            
-        </span>
+        <div class="blank"></div>
 
+        <div class="container white z-depth-3">
+            <h5 class="header">Background</h5>
+            <span class="txt_small">
+                Genomic Islands (GIs) are clusters of genes that are mobilized through horizontal gene transfer. GIs play a pivotal role
+                in bacterial evolution as a mechanism of diversification and adaptation to different niches. Therefore, identification
+                and characterization of GIs in bacterial genomes is important for understanding bacterial evolution. However,
+                quantifying GIs is inherently difficult, and the existing methods suffer from low prediction accuracy and
+                precision-recall trade-off. Moreover, several of them are supervised in nature and thus their applications
+                to newly sequenced genomes are riddled with their dependency on the functional annotation of existing genomes.
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">SSG-LUGIA</h5>
+            <span class="txt_small">
+                We present SSG-LUGIA, a completely automated and unsupervised approach for identifying GIs and horizontally transferred genes.
+                SSG-LUGIA is a novel method based on unsupervised anomaly detection technique, accompanied by further refinement
+                using cues from signal processing literature. SSG-LUGIA leverages the atypical compositional biases of the
+                alien genes to localize GIs in prokaryotic genomes. SSG-LUGIA was assessed on the
+                <strong>IslandPick</strong> benchmark dataset, and on the well-understood
+                <em>Salmonella typhi</em>
+                <strong>CT18</strong> genome. Furthermore, the efficacy of SSG-LUGIA in identifying horizontally transferred genes
+                was evaluated on two additional bacterial genomes, namely, that of
+                <em>Corynebacterium diphtheria</em>
+                <strong>NCTC13129</strong> and
+                <em>Pseudomonas aeruginosa</em>
+                <strong>LESB58</strong>.
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Method</h5>
+            <img src="imgs/SSG-LUGIA.png" width="100%" alt="" srcset="" style="margin-bottom: 5%">
+            <span class="txt_small">
+                SSG-LUGIA takes an unannotated genome sequence as input and predicts GIs and optionally enlists putative horizontally transferred
+                genes in case a gene annotation file is provided. The genome sequence of interest is first split into overlapping
+                window frames that are then analyzed for the presence of GI distinguishing features compiled from publicly
+                available literature on GIs. The genome sequence is screened for “anomalous” regions based on GI distinguishing
+                features using an unsupervised machine learning procedure. The anomalous segments thus identified are further
+                refined following a post-processing step, and finally, the proximal segments are merged to produce the list
+                of GIs (and optionally, the list of horizontally transferred genes).
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Conclusions</h5>
+
+            <span class="txt_small">
+                Our results indicate that SSG-LUGIA achieved superior performance in comparison to frequently used existing methods. Importantly,
+                it yielded a better trade-off between precision and recall than the existing methods. Its non-dependency
+                on the functional annotation of genomes makes it suitable for analyzing newly sequenced, yet uncharacterized
+                genomes.
+            </span>
+
+            <div class="blank"></div>
+
+            <span class="txt_small">
+                Thus, our study is a significant advance in identification of GIs and horizontally transferred genes.
+            </span>
+
+            <div class="blank"></div>
+
+            <span class="txt_small">
+                The source code for SSG-LUGIA has been made open-source to aid the biologists in inferring genomic islands and horizontaly
+                transferred genes from newly sequenced genomes. To further facilitate their discovery SSG-LUGIA will be made
+                available as a web interface with a server application, along with portable cross-platform native applications
+                in coming days.
+            </span>
+        </div>
+
+        <div class="blank" id="codes"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Source Code</h5>
+
+            <span class="txt_small">
+                The source code for SSG-LUGIA can be found in the following github repository.
+            </span>
+
+            <div class="blank"></div>
+
+            <div style="text-align:center">
+                <a class=" waves-effect waves-blue btn-flat btn-medium grey lighten-1" href="https://github.com/nibtehaz/SSG-LUGIA" target="_blank">nibtehaz/SSG-LUGIA</a>
+
+            </div>
+        </div>
+
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Usage</h5>
+
+            <span class="txt_small">
+                SSG-LUGIA provides a flexible way to use the pipeline as a command line interface
+            </span>
+
+            <div class="blank"></div>
+
+            <div class="txt_small">
+
+                1. Clone the git repository.
+                <br>
+                <br>
+                <!-- HTML generated using hilite.me -->
+                <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                    <pre style="margin: 0; line-height: 125%">$ git clone https://github.com/nibtehaz/SSG-LUGIA.git</pre>
+                </div>
+                <br>
+                <br> 2. Navigate to the
+                <span style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .1em;padding:.2em .6em;">/codes</span> directory
+                <br>
+                <br> 3. Import the SSG-LUGIA pipeline from the
+                <span style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .1em;padding:.2em .6em;">main.py</span> script.
+                <br>
+                <br> 4. Execute the SSG-LUGIA pipeline, using either a standard model (SSG-LUGIA-F, SSG-LUGIA-R, SSG-LUGIA-P)
+                or a custom model configuration
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col s12 m6 z-depth-2" style="border: solid 0px gray; border-radius: 0.5rem;margin-bottom:3%;">
+                        (i) Input the path to the genome sequence and provide a standard model name
+
+                        <img src="imgs/ssg_lugia1.gif" width="100%" alt="" srcset="">
+                        <br>
+                        <br>
+                    </div>
+
+                    <div class="col s12 m6 z-depth-2" style="border: solid 0px gray; border-radius: 0.5rem">
+                        (ii) Input the path to the genome sequence and input the model parameters interactively
+
+                        <img src="imgs/ssg_lugia2.gif" width="100%" alt="" srcset="">
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="blank" id="app"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Desktop App</h5>
+
+            <span class="txt_small">
+                A cross-platform desktop app of SSG-LUGIA is under development and will be released soon.
+            </span>
+
+            <div class="blank"></div>
+
+            <div style="text-align:center">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="blank" id="contact"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Contact Us</h5>
+
+            <span class="txt_small">
+                If you have any queries regarding SSG-LUGIA project, please feel free to contact us.
+
+                <h6 style="text-align:center;padding-top:30px">
+                    <a href="mailto:shams_bayzid@cse.buet.ac.bd?Subject=SSG-LUGIA" target="_top">Md. Shamsuzzoha Bayzid, Assistant Professor, CSE, BUET (shams_bayzid@cse.buet.ac.bd)</a>
+                </h6>
+                <h6 style="text-align:center;padding-top:30px">
+                    <a href="mailto:1017052037@grad.cse.buet.ac.bd?Subject=SSG-LUGIA" target="_top">Nabil Ibtehaz, CSE, BUET (1017052037@grad.cse.buet.ac.bd)</a>
+                </h6>
+
+            </span>
+
+        </div>
+
+        <div class="blank"></div>
     </div>
-
-
 </body>
 
 </html>
