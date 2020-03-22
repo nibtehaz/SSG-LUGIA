@@ -1,3 +1,7 @@
+"""
+    Codes to handle file operation
+"""
+
 from Bio import SeqIO
 
 def loadGenome(file_path):

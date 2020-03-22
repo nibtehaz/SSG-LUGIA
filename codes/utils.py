@@ -68,7 +68,7 @@ def inputModel():
             break
     
     while(True):
-        entropy_features = input('>Use Entropy based features : [y/n]\n[y] -yes\n[n]-no\n>')
+        entropy_features = input('>Use Entropy based features : [y/n]\n[y]-yes\n[n]-no\n>')
 
         if(entropy_features=='y'):
             entropy_features = True

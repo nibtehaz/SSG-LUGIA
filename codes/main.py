@@ -1,3 +1,7 @@
+"""
+    Wrapper script of the SSG-LUGIA pipeline
+"""
+
 import numpy as np
 from file_handling import loadGenome
 from models import loadModel
@@ -21,52 +25,52 @@ def SSG_LUGIA(sequence_fasta_file_path = None, genome_sequence = None, model_nam
         list of tuples : list of the tuples containing genomic islands start and end coordinates
     """
 
-    if(sequence_fasta_file_path != None):
+    if(sequence_fasta_file_path != None):               # if a genome sequence fasta file has been provided
 
         genome = loadGenome(sequence_fasta_file_path)
     
-    elif(genome_sequence != None):
+    elif(genome_sequence != None):                      # otherwise the genome sequence has been provided
 
         genome = genome_sequence
 
-    else:
+    else:                                               # no genome sequence has been provided
 
         raise ValueError('Please input either genome sequence of sequence fasta file path')
 
 
-    if(model_name != None):
+    if(model_name != None):                             # if a standard model name has been provided
 
         model = loadModel(model_name)
     
-    elif(model_parameters != None):
+    elif(model_parameters != None):                     # a custom model parameter configuration has been provided
 
         model = model_parameters
 
-    else:
+    else:                                               # interactively input the model
 
         model = inputModel()
 
     
 
-    X = extractFeatures(genome,model)
+    X = extractFeatures(genome,model)                   # extracting features
 
     print()
 
     print('Detecting Anomalies')
 
-    (yp,ys) = detectAnomalies(X, model)
+    (yp,ys) = detectAnomalies(X, model)                 # Detecting anomalies
 
     print('Post-Processing')
 
-    ys_mf = medianFiltering(ys,model)
+    ys_mf = medianFiltering(ys,model)                   # applying median filter
     
-    yp_mf = binaizeFilteredDistance(ys_mf)
+    yp_mf = binaizeFilteredDistance(ys_mf)              # binarizing the values
 
-    label_pred = inferLabel(yp_mf, len(genome), model)
+    label_pred = inferLabel(yp_mf, len(genome), model)  # infer prediction
 
-    label = trimRegions(label_pred, model)
+    label = trimRegions(label_pred, model)              # eliminate small islands
 
-    genomic_islands = getGenomicIslands(label)
+    genomic_islands = getGenomicIslands(label)          # extract genomic islands
 
     print('Total Number of Genomic Islands = {}'.format(len(genomic_islands)))
 
@@ -75,7 +79,6 @@ def SSG_LUGIA(sequence_fasta_file_path = None, genome_sequence = None, model_nam
     for genomic_island in genomic_islands:
         print('{}\t{}'.format(genomic_island[0], genomic_island[1]))
 
-    return genomic_islands
+    return genomic_islands                              # return the islands
 
 
-#Execute(sequence_fasta_file_path='sample_data/NC_003198.1.fasta',model_name='SSG-LUGIA-F')
