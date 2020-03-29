@@ -32,7 +32,7 @@ The codes for SSG-LUGIA are written in python and can be found [here](https://gi
 
 2. Install the requirements
 
-```$ pip3 install requirements.txt```
+```$ pip3 install -r requirements.txt```
 
 3. Navigate to the ```/codes``` directory
 
