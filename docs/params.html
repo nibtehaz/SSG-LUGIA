@@ -1,0 +1,1131 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SSG-LUGIA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161417761-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-161417761-1');
+    </script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+
+    <style>
+        nav {
+
+            background: -webkit-linear-gradient(to left, #00695c, #283c86) !important;
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #00695c, #283c86) !important;
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        body {
+            background: rgba(120, 239, 255, 0.3);
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, rgba(120, 255, 214, 0.5), rgba(120, 239, 255, 0.3));
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, rgba(120, 255, 214, 0.5), rgba(120, 239, 255, 0.3));
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .title-container {
+            background: #fffcdc;
+
+
+
+            width: 90%;
+            padding: 7.5% 5% 7.5% 5%;
+            margin-top: 2.5%;
+            margin-bottom: 2.5%;
+            margin-left: 5%;
+
+
+            border-radius: 2.5rem;
+
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .container {
+            padding: 5%
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        .txt {
+            font-size: 1.5rem;
+            line-height: 150%;
+        }
+
+        .code_txt {
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .ctxt {
+            padding: 0rem !important;
+        }
+
+        .chead {
+            font-size: 1.125rem !important;
+            padding: 1rem !important;
+            background-color: azure;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .cblk {
+            padding-left: 2.5rem !important;
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        .txt_small {
+            font-size: 1.1rem;
+            line-height: 150%;
+        }
+
+        .blank {
+            margin-bottom: 3%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hide-on-small-only">
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a style="margin-left:25px" class="brand-logo" href="#home">SSG-LUGIA</a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="title-container z-depth-5" id="home">
+            <h2 class="center">SSG-LUGIA: Single Sequence based Genome Level Unsupervised Genomic Island Prediction
+                Algorithm</h2>
+
+        </div>
+
+
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Model Parameters</h3>
+            <span class="txt">
+                SSG-LUGIA combines several sequence based features to infer GIs using an unsupervised anomaly detection
+                pipeline.
+            </span>
+
+
+            <div class="blank"></div>
+
+            <ul class="collection">
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        w : int
+                        <span class="right">
+                            default : 10000
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Length of sliding window
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        dw : int
+                        <span class="right">
+                            default : 100
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Step size of sliding window
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        karlin_mode : str {'normalized', 'original', 'raw'}
+                        <span class="right">
+                            default : 'normalized'
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        The mode of karlin feature computation
+
+                        <ul>
+                            <li>
+                                If <span class="code_txt">normalized</span>
+
+                                $$2-mers = \frac{freq(XY)}{\sqrt{freq(X) \times freq(Y)}}$$
+                            </li>
+                            <li>
+                                If <span class="code_txt">original</span>
+
+                                $$2-mers = \frac{freq(XY)}{freq(X) \times freq(Y)}$$
+                            </li>
+                            <li>
+                                If <span class="code_txt">raw</span>
+                                $$2-mers = freq(X)$$
+                            </li>
+                        </ul>
+
+                        Here, 
+                        $$X \in [A,T,C,G]$$
+                        $$Y \in [A,T,C,G]$$
+                    </div>
+                </li>
+
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        pca_dn : int [1,16]
+                        <span class="right">
+                            default : 2
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Number of PCA components for dinucleotide features
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        pca_amino_acid : int [1,20]
+                        <span class="right">
+                            default : 2
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Number of PCA components for amino acid features
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        pca_kmer4 : int [1,256]
+                        <span class="right">
+                            default : 2
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Number of PCA components for 4-mer features
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        entropy_features : bool
+                        <span class="right">
+                            default : True
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Using entropy features or not
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        contamination_model1 : float [0.0,0.99]
+                        <span class="right">
+                            default : 0.15
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        The probable amount of outliers in the first anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        support_fraction_model1 : float [0.0,0.99]
+                        <span class="right">
+                            default : 0.75
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        The proportion of points to be included in the support of the raw MCD estimate in the first
+                        anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        contamination_model2 : float [0.0,0.99]
+                        <span class="right">
+                            default : 0.05
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        The probable amount of outliers in the second anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        support_fraction_model2 : float [0.0,0.99]
+                        <span class="right">
+                            default : 0.9
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        The proportion of points to be included in the support of the raw MCD estimate in the second
+                        anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        median_filter_window_len : int
+                        <span class="right">
+                            default : 400
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Window size used in median filtering.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        min_island_len : int
+                        <span class="right">
+                            default : 10000
+                        </span>
+                    </div>
+                    <div class="cblk">
+                        Minimum length of predicted genomic islands. Islands with lesser length will be discarded
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Default Models</h3>
+            <span class="txt">
+                We present 3 variants of SSG-LUGIA. SSG-LUGIA<sub>F</sub>, SSG-LUGIA<sub>P</sub> and
+                SSG-LUGIA<sub>R</sub> tries to optimize the F1-Score, Precision and Recall respectively. The parameter
+                values used in these models are as follows:
+
+                <div class="blank"></div>
+
+                <table class="centered striped responsive-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                SSG-LUGIA<sub>F</sub>
+                            </th>
+                            <th>
+                                SSG-LUGIA<sub>P</sub>
+                            </th>
+                            <th>
+                                SSG-LUGIA<sub>R</sub>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="code_txt">w</span>
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">dw</span>
+                            </td>
+                            <td>
+                                100
+                            </td>
+                            <td>
+                                100
+                            </td>
+                            <td>
+                                100
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">karlin_mode</span>
+                            </td>
+                            <td>
+                                'normalized'
+                            </td>
+                            <td>
+                                'normalized'
+                            </td>
+                            <td>
+                                'normalized'
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">pca_dn</span>
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">pca_amino_acid</span>
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">pca_kmer4</span>
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">contamination_model1</span>
+                            </td>
+                            <td>
+                                0.15
+                            </td>
+                            <td>
+                                0.075
+                            </td>
+                            <td>
+                                0.2
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">support_fraction_model1</span>
+                            </td>
+                            <td>
+                                0.75
+                            </td>
+                            <td>
+                                0.75
+                            </td>
+                            <td>
+                                0.75
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">contamination_model2</span>
+                            </td>
+                            <td>
+                                0.05
+                            </td>
+                            <td>
+                                0.075
+                            </td>
+                            <td>
+                                0.25
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">support_fraction_model2</span>
+                            </td>
+                            <td>
+                                0.9
+                            </td>
+                            <td>
+                                0.9
+                            </td>
+                            <td>
+                                0.9
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">median_filter_window_len</span>
+                            </td>
+                            <td>
+                                400
+                            </td>
+                            <td>
+                                400
+                            </td>
+                            <td>
+                                400
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">min_island_len</span>
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+            </span>
+        </div>
+
+
+        <div class="blank"></div>
+
+
+        <div class="container white z-depth-3">
+            <h3 class="header">Creating Custom Models</h3>
+            <span class="txt">
+                Users can create custom models using Python dictionaries containing the parameters.
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);  font-size: medium;">
+custom_model = {}
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'w'</span>] = <span class="hljs-number">15000</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'dw'</span>] = <span class="hljs-number">250</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'karlin_mode'</span>] = <span class="hljs-string" style="color: rgb(241, 250, 140);">"normalized"</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'pca_dn'</span>] = <span class="hljs-number">2</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'pca_amino_acid'</span>] = <span class="hljs-number">2</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'pca_kmer4'</span>] = <span class="hljs-number">2</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'entropy_features'</span>] = <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">True</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'contamination_model1'</span>] = <span class="hljs-number">0.25</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'support_fraction_model1'</span>] = <span class="hljs-number">0.75</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'contamination_model2'</span>] = <span class="hljs-number">0.125</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'support_fraction_model2'</span>] = <span class="hljs-number">0.9</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'median_filter_window_len'</span>] = <span class="hljs-number">1000</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'min_island_len'</span>] = <span class="hljs-number">4000</span>
+</pre>
+                
+                The custom models can be used by passing the as <span class="code_txt">model_parameters</span> 
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242); font-size: medium;">
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">from</span> main <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> SSG_LUGIA
+
+SSG_LUGIA(sequence_fasta_file_path=<span class="hljs-string" style="color: rgb(241, 250, 140);">'sample_data/NC_003198.1.fasta'</span>,model_parameters=custom_model)</pre>
+
+                Such models can be stored as .json files and loaded for future use.
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);  font-size: medium;">
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> json
+
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">with</span> open(<span class="hljs-string" style="color: rgb(241, 250, 140);">'custom_model.json'</span>, <span class="hljs-string" style="color: rgb(241, 250, 140);">'w'</span>) <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">as</span> outfile:
+    json.dump(custom_model, outfile)
+                </pre>
+
+                The .json format models can be used by passing the path to the .json file
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242); font-size: medium;">
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700; ">from</span> main <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> SSG_LUGIA
+
+SSG_LUGIA(sequence_fasta_file_path=<span class="hljs-string" style="color: rgb(241, 250, 140);">'sample_data/NC_003198.1.fasta'</span>,model_name=<span class="hljs-string" style="color: rgb(241, 250, 140);">'custom_model.json'</span>)</pre>
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+    </div>
+
+
+
+
+    </div>
+
+    <div class="hide-on-med-and-up">
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a class="brand-logo" href="#home">SSG-LUGIA</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <a class="waves-effect waves-light">Publication</a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#codes">Codes</a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#app">Desktop App
+                                <span class="new badge pink lighten-2 black-text"
+                                    data-badge-caption="Coming Soon"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-light" href="#contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="title-container z-depth-5" id="home">
+            <h5 class="center">SSG-LUGIA: Single Sequence based Genome Level Unsupervised Genomic Island Prediction
+                Algorithm</h5>
+
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Model Parameters</h5>
+            <span class="txt_small">
+                SSG-LUGIA combines several sequence based features to infer GIs using an unsupervised anomaly detection
+                pipeline.
+            </span>
+
+            <div class="blank"></div>
+
+            <ul class="collection">
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        w : int
+                        <br>
+                        default : 10000
+                    </div>
+                    <div class="cblk">
+                        Length of sliding window
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        dw : int
+                        <br>
+                        default : 100
+
+                    </div>
+                    <div class="cblk">
+                        Step size of sliding window
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        karlin_mode : str {'normalized', 'original', 'raw'}
+                        <br>
+                        default : 'normalized'
+
+                    </div>
+                    <div class="cblk">
+                        The mode of karlin feature computation
+
+                        <ul>
+                            <li>
+                                If <span class="code_txt">normalized</span>
+
+                                $$2-mers = \frac{freq(XY)}{\sqrt{freq(X) \times freq(Y)}}$$
+                            </li>
+                            <li>
+                                If <span class="code_txt">original</span>
+
+                                $$2-mers = \frac{freq(XY)}{freq(X) \times freq(Y)}$$
+                            </li>
+                            <li>
+                                If <span class="code_txt">raw</span>
+                                $$2-mers = freq(X)$$
+                            </li>
+                        </ul>
+
+                        Here, 
+                        $$X \in [A,T,C,G]$$
+                        $$Y \in [A,T,C,G]$$
+                    </div>
+                </li>
+
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        pca_dn : int [1,16]
+                        <br>
+                        default : 2
+
+                    </div>
+                    <div class="cblk">
+                        Number of PCA components for dinucleotide features
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        pca_amino_acid : int [1,20]
+                        <br>
+                        default : 2
+
+                    </div>
+                    <div class="cblk">
+                        Number of PCA components for amino acid features
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        pca_kmer4 : int [1,256]
+                        <br>
+                        default : 2
+
+                    </div>
+                    <div class="cblk">
+                        Number of PCA components for 4-mer features
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        entropy_features : bool
+                        <br>
+                        default : True
+
+                    </div>
+                    <div class="cblk">
+                        Using entropy features or not
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        contamination_model1 : float [0.0,0.99]
+                        <br>
+                        default : 0.15
+
+                    </div>
+                    <div class="cblk">
+                        The probable amount of outliers in the first anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        support_fraction_model1 : float [0.0,0.99]
+                        <br>
+                        default : 0.75
+
+                    </div>
+                    <div class="cblk">
+                        The proportion of points to be included in the support of the raw MCD estimate in the first
+                        anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        contamination_model2 : float [0.0,0.99]
+                        <br>
+                        default : 0.05
+
+                    </div>
+                    <div class="cblk">
+                        The probable amount of outliers in the second anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        support_fraction_model2 : float [0.0,0.99]
+                        <br>
+                        default : 0.9
+
+                    </div>
+                    <div class="cblk">
+                        The proportion of points to be included in the support of the raw MCD estimate in the second
+                        anomaly detection scan.
+                        <br>
+                        This is required by <span class="code_txt">sklearn.covariance.EllipticEnvelope</span>.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        median_filter_window_len : int
+                        <br>
+                        default : 400
+
+                    </div>
+                    <div class="cblk">
+                        Window size used in median filtering.
+                    </div>
+                </li>
+
+                <li class="collection-item ctxt">
+                    <div class="chead">
+                        min_island_len : int
+                        <br>
+                        default : 10000
+
+                    </div>
+                    <div class="cblk">
+                        Minimum length of predicted genomic islands. Islands with lesser length will be discarded
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Default Models</h5>
+            <span class="txt_small">
+                We present 3 variants of SSG-LUGIA. SSG-LUGIA<sub>F</sub>, SSG-LUGIA<sub>P</sub> and
+                SSG-LUGIA<sub>R</sub> tries to optimize the F1-Score, Precision and Recall respectively. The parameter
+                values used in these models are as follows:
+
+                <div class="blank"></div>
+
+                <table class="centered striped responsive-table txt_small">
+                    <thead>
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                SSG-LUGIA<sub>F</sub>
+                            </th>
+                            <th>
+                                SSG-LUGIA<sub>P</sub>
+                            </th>
+                            <th>
+                                SSG-LUGIA<sub>R</sub>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="code_txt">w</span>
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">dw</span>
+                            </td>
+                            <td>
+                                100
+                            </td>
+                            <td>
+                                100
+                            </td>
+                            <td>
+                                100
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">karlin_mode</span>
+                            </td>
+                            <td>
+                                'normalized'
+                            </td>
+                            <td>
+                                'normalized'
+                            </td>
+                            <td>
+                                'normalized'
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">pca_dn</span>
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">pca_amino_acid</span>
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">pca_kmer4</span>
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                2
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">contamination_model1</span>
+                            </td>
+                            <td>
+                                0.15
+                            </td>
+                            <td>
+                                0.075
+                            </td>
+                            <td>
+                                0.2
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">support_fraction_model1</span>
+                            </td>
+                            <td>
+                                0.75
+                            </td>
+                            <td>
+                                0.75
+                            </td>
+                            <td>
+                                0.75
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">contamination_model2</span>
+                            </td>
+                            <td>
+                                0.05
+                            </td>
+                            <td>
+                                0.075
+                            </td>
+                            <td>
+                                0.25
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">support_fraction_model2</span>
+                            </td>
+                            <td>
+                                0.9
+                            </td>
+                            <td>
+                                0.9
+                            </td>
+                            <td>
+                                0.9
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">median_filter_window_len</span>
+                            </td>
+                            <td>
+                                400
+                            </td>
+                            <td>
+                                400
+                            </td>
+                            <td>
+                                400
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="code_txt">min_island_len</span>
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                            <td>
+                                10000
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+            </span>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="container white z-depth-3">
+            <h5 class="header">Creating Custom Models</h5>
+            <span class="txt_small">
+
+                Users can create custom models using Python dictionaries containing the parameters.
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);  font-size: smaller;">
+custom_model = {}
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'w'</span>] = <span class="hljs-number">15000</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'dw'</span>] = <span class="hljs-number">250</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'karlin_mode'</span>] = <span class="hljs-string" style="color: rgb(241, 250, 140);">"normalized"</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'pca_dn'</span>] = <span class="hljs-number">2</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'pca_amino_acid'</span>] = <span class="hljs-number">2</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'pca_kmer4'</span>] = <span class="hljs-number">2</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'entropy_features'</span>] = <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">True</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'contamination_model1'</span>] = <span class="hljs-number">0.25</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'support_fraction_model1'</span>] = <span class="hljs-number">0.75</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'contamination_model2'</span>] = <span class="hljs-number">0.125</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'support_fraction_model2'</span>] = <span class="hljs-number">0.9</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'median_filter_window_len'</span>] = <span class="hljs-number">1000</span>
+custom_model[<span class="hljs-string" style="color: rgb(241, 250, 140);">'min_island_len'</span>] = <span class="hljs-number">4000</span>
+</pre>
+                
+                The custom models can be used by passing the as <span class="code_txt">model_parameters</span> 
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242); font-size: smaller;">
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">from</span> main <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> SSG_LUGIA
+
+SSG_LUGIA(sequence_fasta_file_path=<span class="hljs-string" style="color: rgb(241, 250, 140);">'sample_data/NC_003198.1.fasta'</span>,model_parameters=custom_model)</pre>
+
+                Such models can be stored as .json files and loaded for future use.
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);  font-size: smaller;">
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> json
+
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">with</span> open(<span class="hljs-string" style="color: rgb(241, 250, 140);">'custom_model.json'</span>, <span class="hljs-string" style="color: rgb(241, 250, 140);">'w'</span>) <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">as</span> outfile:
+    json.dump(custom_model, outfile)
+                </pre>
+
+                The .json format models can be used by passing the path to the .json file
+
+                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242); font-size: smaller;">
+<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700; ">from</span> main <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> SSG_LUGIA
+
+SSG_LUGIA(sequence_fasta_file_path=<span class="hljs-string" style="color: rgb(241, 250, 140);">'sample_data/NC_003198.1.fasta'</span>,model_name=<span class="hljs-string" style="color: rgb(241, 250, 140);">'custom_model.json'</span>)</pre>
+            </span>
+        </div>
+
+
+        <div class="blank"></div>
+
+
+
+        <div class="blank"></div>
+    </div>
+</body>
+
+</html>

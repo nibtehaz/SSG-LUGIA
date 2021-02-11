@@ -48,3 +48,22 @@ The codes for SSG-LUGIA are written in python and can be found [here](https://gi
 
 
 ```SSG_LUGIA(sequence_fasta_file_path='sample_data/NC_003198.1.fasta',model_name='SSG-LUGIA-F')```
+
+7. Alternatively, the model name can be omitted and the user can set the parameters interactively
+
+```SSG_LUGIA(sequence_fasta_file_path='sample_data/NC_003198.1.fasta')```
+
+8. Alternatively, the user can input a custom model as dictionary
+
+```SSG_LUGIA(sequence_fasta_file_path='sample_data/NC_003198.1.fasta',model_parameters=custom_model)```
+
+9. Alternatively, the user can create a model based on their requirement, save it as a json file and input the path to the json file
+
+```SSG_LUGIA(sequence_fasta_file_path='sample_data/NC_003198.1.fasta',model_name='path-to-json')```
+
+
+## Model Parameters
+
+SSG-LUGIA combines several sequence based features to infer GIs using an unsupervised anomaly detection pipeline. The various model parameters can be found in [SSG-LUGIA Model Parameters](https://nibtehaz.github.io/SSG-LUGIA/params). Users can develop custom model variants by changing these parameters and also save the model as json for future use.
+
+

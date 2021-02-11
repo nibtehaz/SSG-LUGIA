@@ -1,3 +1,5 @@
+import json
+
 """
     Trained models presented in the manuscript.
     Provides method to load the models
@@ -74,3 +76,31 @@ def loadModel(model_name):
 
     else:
         raise ValueError('Invalid Model Name Provided')
+
+
+def loadModelJson(model_path):
+    """
+    Loads a SSG-LUGIA model created by the user saved as .json file
+    
+    Arguments:
+        model_path {string} -- path to the model json file
+
+    Returns:
+        dictionary -- the user-defined model
+    """
+
+    try:
+        fp = open(model_path,'r')
+        model_data = fp.read()
+        fp.close()
+
+        try:
+            model = json.loads()
+
+            return model
+
+        except:
+            raise ValueError('Invalid Json File Provided')
+    
+    except:
+        raise ValueError('Invalid Path Provided')

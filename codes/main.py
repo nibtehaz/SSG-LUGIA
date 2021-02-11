@@ -4,7 +4,7 @@
 
 import numpy as np
 from file_handling import loadGenome
-from models import loadModel
+from models import loadModel, loadModelJson
 from feature_extraction import extractFeatures
 from anomaly_detection import detectAnomalies
 from post_processing import medianFiltering, binaizeFilteredDistance, inferLabel, trimRegions
@@ -18,7 +18,7 @@ def SSG_LUGIA(sequence_fasta_file_path = None, genome_sequence = None, model_nam
     Keyword Arguments:
         sequence_fasta_file_path {string} -- path to the genome sequence fasta file (default: {None})
         genome_sequence {string} -- the actual genome sequence (default: {None})
-        model_name {string} -- name of one of the standard models (default: {None})
+        model_name {string} -- name of one of the standard models or path to model json file (default: {None})
         model_parameters {dictionary} -- SSG-LUGIA model configuration (default: {None})
     
     Returns:
@@ -38,9 +38,13 @@ def SSG_LUGIA(sequence_fasta_file_path = None, genome_sequence = None, model_nam
         raise ValueError('Please input either genome sequence of sequence fasta file path')
 
 
-    if(model_name != None):                             # if a standard model name has been provided
-
-        model = loadModel(model_name)
+    if(model_name != None):                             
+                                                # if a standard model name has been provided
+        if (model_name in ['SSG-LUGIA-F','SSG-LUGIA-R','SSG-LUGIA-P']):
+            model = loadModel(model_name)
+                                                # if path to the json file has been provided
+        else:
+            model = loadModelJson(model_name)            
     
     elif(model_parameters != None):                     # a custom model parameter configuration has been provided
 
