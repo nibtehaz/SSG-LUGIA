@@ -67,3 +67,15 @@ The codes for SSG-LUGIA are written in python and can be found [here](https://gi
 SSG-LUGIA combines several sequence based features to infer GIs using an unsupervised anomaly detection pipeline. The various model parameters can be found in [SSG-LUGIA Model Parameters](https://nibtehaz.github.io/SSG-LUGIA/params). Users can develop custom model variants by changing these parameters and also save the model as json for future use.
 
 
+## Citation Request
+
+If you use ***SSG-LUGIA*** in your project, please cite the following paper
+
+```
+@article{ibtehaz2021ssg,
+  title={SSG-LUGIA: Single Sequence based Genome Level Unsupervised Genomic Island Prediction Algorithm},
+  author={Ibtehaz, Nabil and Ahmed, Ishtiaque and Ahmed, Md Sabbir and Rahman, M Sohel and Azad, Rajeev K and Bayzid, Md Shamsuzzoha},
+  journal={Briefings in Bioinformatics},
+  year={2021}
+}
+```
