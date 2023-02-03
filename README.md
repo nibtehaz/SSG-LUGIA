@@ -3,6 +3,10 @@
 
 This repository contains the original implementation of SSG-LUGIA, an unsupervised learning based tool to predict genomic islands.
 
+<a href="https://colab.research.google.com/drive/1sT7jEKJMgDVCHjkxX1vt-utx9GyoU7cY?usp=sharing" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+
+
 ## Project Website
 
 [SSG-LUGIA Project Website](https://nibtehaz.github.io/SSG-LUGIA)
